@@ -27,7 +27,7 @@
           <% for(post of posts) {%>
 
           <div class="post-preview">
-            <a href="/post">
+            <a href="/post/<%=post._id%>">
               <h2 class="post-title"><%= post.title %></h2>
               <h3 class="post-subtitle"><%= post.subtitle %></h3>
             </a>
@@ -55,10 +55,10 @@
 
     <%- include("partials/_footer") -%>
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom scripts for this template -->
-    <script src="js/clean-blog.min.js"></script>
+    <script src="/js/clean-blog.min.js"></script>
   </body>
 </html>

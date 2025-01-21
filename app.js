@@ -30,6 +30,12 @@ app.get("/", async (req, res) => {
   res.render("index", { posts, moment });
 });
 
+app.get("/post/:id", async (req, res) => {
+  const post = await Post.findById(req.params.id);
+
+  res.render("post", { post, moment });
+});
+
 app.get("/about", (req, res) => {
   res.render("about");
 });
