@@ -9,7 +9,20 @@ const Post = require("./models/Post");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const moment = require("moment");
+const methodOverride = require("method-override");
+
+const {
+  getAllPosts,
+  getPost,
+  createPost,
+  updatePost,
+  deletePost,
+} = require("./controllers/postControllers");
+const {
+  getAboutPage,
+  getAddPost,
+  getEditPostPage,
+} = require("./controllers/pageControllers");
 
 //connect db
 
@@ -23,40 +36,33 @@ app.set("view engine", "ejs");
 
 app.use(express.static("public"));
 
+app.use(methodOverride("_method"));
+
 //ROUTES
 
-app.get("/", async (req, res) => {
-  const posts = await Post.find({});
-  res.render("index", { posts, moment });
-});
+//Pages
+app.get("/", getAllPosts);
 
-app.get("/post/:id", async (req, res) => {
-  const post = await Post.findById(req.params.id);
+app.get("/post/:id", getPost);
 
-  res.render("post", { post, moment });
-});
+app.get("/about", getAboutPage);
 
-app.get("/about", (req, res) => {
-  res.render("about");
-});
+app.get("/add", getAddPost);
 
-app.get("/add", (req, res) => {
-  res.render("add_post");
-});
+//Controllers
 
-app.get("/post", (req, res) => {
-  res.render("post");
-});
+app.post("/posts", createPost);
+
+app.get("/posts/edit/:id", getEditPostPage);
+
+app.put("/posts/:id", updatePost);
+
+app.delete("/posts/:id", deletePost);
 
 /* app.get("/", (req, res) => {
   const blog = { id: 1, title: "Blog title", description: "Blog description" };
   res.send(blog);
 }); */
-
-app.post("/posts", async (req, res) => {
-  await Post.create(req.body);
-  res.redirect("/");
-});
 
 const port = 3000;
 

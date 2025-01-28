@@ -26,6 +26,29 @@
       </div>
     </header>
 
+    <div class="d-flex justify-content-center mb-3 align-items-center">
+      <div class="mr-1">
+        <a
+          href="/posts/edit/<%=post._id %>"
+          class="btn btn-info rounded cursor-pointer"
+        >
+          Edit
+        </a>
+      </div>
+      <form
+        class="ml-1"
+        method="post"
+        action="/posts/<%=post._id %>?_method=DELETE"
+      >
+        <button
+          onclick="return confirm('Are You Sure?')"
+          class="btn btn-danger rounded"
+        >
+          Delete
+        </button>
+      </form>
+    </div>
+
     <!-- Post Content -->
     <article>
       <div class="container">
