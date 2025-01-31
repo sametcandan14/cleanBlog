@@ -26,7 +26,12 @@ const {
 
 //connect db
 
-mongoose.connect("mongodb://localhost/cleanblog-test-db");
+mongoose
+  .connect(
+    "mongodb+srv://samet:628nxsNb1tCVI8XN@cluster0.svezz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  )
+  .then(() => console.log("db connected"))
+  .catch((err) => console.log(err));
 
 //TEMPLATE ENGINE
 
@@ -64,7 +69,7 @@ app.delete("/posts/:id", deletePost);
   res.send(blog);
 }); */
 
-const port = 3000;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`Sunucu port ${port} de çalışıyor.`);
